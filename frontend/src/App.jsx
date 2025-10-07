@@ -7,14 +7,16 @@ import PatientDashboardLayout from './components/Patient/PatientDashboardLayout.
 
 // Public Pages
 import HomePage from './pages/HomePage.jsx';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage.jsx';
+import SignupPage from './pages/SignupPage.jsx';
 
 // Patient Pages
 import PatientDashboardPage from './pages/Patient/DashboardPage.jsx';
 import AppointmentsPage from './pages/Patient/AppointmentsPage.jsx';
+import BookAppointmentPage from './pages/Patient/BookAppointmentPage.jsx';
 import PrescriptionsPage from './pages/Patient/PrescriptionsPage.jsx';
-import BookAppointmentPage from './pages/Patient/BookAppointmentPage.jsx'; // Booking page ko import karein
+import MedicineFinderPage from './pages/Patient/MedicineFinderPage.jsx'; // NEW: Medicine Finder Search Page
+import MedicineDetailPage from './pages/Patient/MedicineDetailPage.jsx'; // NEW: Medicine Detail Page
 
 // Placeholder for other pages
 const Placeholder = ({ title }) => (
@@ -41,10 +43,13 @@ function App() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<PatientDashboardPage />} />
           <Route path="appointments" element={<AppointmentsPage />} />
-          {/* Booking page ke liye naya route */}
           <Route path="book-appointment" element={<BookAppointmentPage />} /> 
           <Route path="prescriptions" element={<PrescriptionsPage />} />
-          <Route path="medicine-finder" element={<Placeholder title="Medicine Finder" />} />
+          
+          {/* UPDATED: Functional routes for Medicine Finder */}
+          <Route path="medicine-finder" element={<MedicineFinderPage />} />
+          <Route path="medicine-finder/:medicineId" element={<MedicineDetailPage />} />
+
           <Route path="health-records" element={<Placeholder title="Health Records" />} />
           <Route path="billing" element={<Placeholder title="Billing" />} />
           <Route path="settings" element={<Placeholder title="Settings" />} />
