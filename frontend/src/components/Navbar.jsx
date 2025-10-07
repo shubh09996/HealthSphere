@@ -59,7 +59,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="md:hidden absolute top-full left-0 right-0 bg-background backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border py-4 z-[60]"
+          className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border py-4 z-[60]"
         >
           <nav className="flex flex-col items-center space-y-4">
             <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }} onClick={() => setIsMenuOpen(false)}>Features</motion.a>

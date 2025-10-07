@@ -9,7 +9,7 @@ const BookingStepper = ({ steps, currentStep, isFollowUp }) => {
     }
 
     return (
-        <div className="p-6 bg-card rounded-xl border border-border h-full">
+        <div className="p-6 bg-card rounded-xl border border-border">
             <h2 className="font-bold text-lg mb-6">Booking Progress</h2>
             <div className="relative">
                 {/* Dotted line connecting steps */}

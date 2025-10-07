@@ -7,12 +7,12 @@ import { MessageSquare } from 'lucide-react';
 
 const PatientDashboardPage = () => {
     return (
-        <div className="flex flex-col h-full gap-6">
+        <div className="flex flex-col gap-6">
             <PremiumBanner />
 
             <div>
-                <h1 className="text-3xl font-bold text-foreground">Welcome back, Ravi! 👋</h1>
-                <p className="text-muted-foreground mt-1">Here's your health overview for today</p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Welcome back, Ravi! 👋</h1>
+                <p className="text-sm sm:text-base text-muted-foreground mt-1">Here's your health overview for today</p>
             </div>
 
             <DashboardStats />

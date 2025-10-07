@@ -12,7 +12,7 @@ const PatientDashboardLayout = () => {
 
     return (
         // Main container ab flex-col hai
-        <div className="flex flex-col h-screen bg-background">
+        <div className="flex flex-col min-h-screen bg-background">
             {/* Header ab hamesha top par rahega */}
             <Header 
                 isSidebarOpen={isMobileSidebarOpen} 
@@ -22,7 +22,7 @@ const PatientDashboardLayout = () => {
             />
 
             {/* Header ke neeche wala section */}
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1">
                 {/* --- Desktop Sidebar --- */}
                 {/* CHANGED: Width ko state ke hisab se dynamic banaya gaya */}
                 <div className={`hidden md:block transition-all duration-300 ease-in-out ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
@@ -41,13 +41,13 @@ const PatientDashboardLayout = () => {
                         className="fixed top-0 left-0 h-full w-64 bg-card transition-transform duration-300"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <PatientSidebar isCollapsed={false} />
+                        <PatientSidebar isCollapsed={false} onCloseMobileSidebar={() => setIsMobileSidebarOpen(false)} />
                     </div>
                 </div>
 
                 {/* --- Main Content --- */}
                 {/* CHANGED: Main content ab flex-1 se automatically space lega. Margin ki zarurat nahi. */}
-                <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                <main className="flex-1 overflow-y-auto pt-6 p-4 sm:p-6 lg:p-8 min-h-0">
                     <Outlet />
                 </main>
             </div>

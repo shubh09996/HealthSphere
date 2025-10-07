@@ -21,7 +21,7 @@ const SidebarNavLink = ({ to, icon: Icon, text, isCollapsed }) => (
     </NavLink>
 );
 
-const PatientSidebar = ({ isCollapsed, toggleCollapse }) => {
+const PatientSidebar = ({ isCollapsed, toggleCollapse, onCloseMobileSidebar }) => {
     const navItems = [
         { icon: Home, text: 'Dashboard', path: '/patient/dashboard' },
         { icon: Calendar, text: 'Appointments', path: '/patient/appointments' },
@@ -37,7 +37,7 @@ const PatientSidebar = ({ isCollapsed, toggleCollapse }) => {
             
             {/* NEW: Collapse/Expand Button */}
             <button 
-                onClick={toggleCollapse} 
+                onClick={onCloseMobileSidebar ? onCloseMobileSidebar : toggleCollapse} 
                 className="absolute -right-3 top-8 z-10 p-1 bg-card border border-border rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
             >
                 {isCollapsed ? <ChevronsRight size={16} /> : <ChevronsLeft size={16} />}

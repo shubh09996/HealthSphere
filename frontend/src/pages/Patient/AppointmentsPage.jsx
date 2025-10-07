@@ -53,7 +53,7 @@ const AppointmentsPage = () => {
             {/* Page Header */}
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-foreground">My Appointments</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-3xl font-bold text-foreground">My Appointments</h1>
                     <p className="text-muted-foreground mt-1">View and manage your appointments.</p>
                 </div>
                 {/* Button ko Link se replace kiya gaya */}
@@ -68,7 +68,7 @@ const AppointmentsPage = () => {
 
             {/* Tabs */}
             <div className="border-b border-border">
-                <nav className="-mb-px flex space-x-6">
+                <nav className="-mb-px flex space-x-3 sm:space-x-6">
                     <button 
                         onClick={() => setActiveTab('upcoming')}
                         className={`py-3 px-1 border-b-2 font-semibold text-sm transition-colors ${activeTab === 'upcoming' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'}`}

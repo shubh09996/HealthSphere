@@ -6,7 +6,7 @@ import { Search, ListFilter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PrescriptionsPage = () => {
-    const [selectedId, setSelectedId] = useState(prescriptionsData[0]?.id || null);
+    const [selectedId, setSelectedId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [filter, setFilter] = useState('All'); // All, Active, Expired
 
@@ -28,9 +28,9 @@ const PrescriptionsPage = () => {
     }, [selectedId]);
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[calc(100vh-100px)]">
+        <div className="flex flex-col xl:grid xl:grid-cols-3 xl:gap-8 gap-6 flex-grow min-h-0 xl:h-[calc(100vh-100px)]">
             {/* Left Column: List & Filters */}
-            <div className="lg:col-span-1 flex flex-col h-full">
+            <div className="flex flex-col xl:col-span-1">
                 <div>
                     <h1 className="text-3xl font-bold text-foreground">My Prescriptions</h1>
                     <p className="text-muted-foreground mt-1">View and manage all your e-prescriptions.</p>
@@ -60,7 +60,7 @@ const PrescriptionsPage = () => {
                 </div>
 
                 {/* Prescriptions List */}
-                <div className="flex-1 overflow-y-auto pr-2 space-y-3">
+                <div className="flex-1 pr-2 space-y-3">
                     <AnimatePresence>
                          {filteredPrescriptions.length > 0 ? (
                             filteredPrescriptions.map(p => (
@@ -87,16 +87,38 @@ const PrescriptionsPage = () => {
                 </div>
             </div>
 
-            {/* Right Column: Detail View */}
-            <div className="lg:col-span-2 h-full hidden lg:block">
-                 <PrescriptionDetailView prescription={selectedPrescription} />
-            </div>
-
-            {/* Modal for Mobile View */}
             {selectedPrescription && (
-                <div className="lg:hidden fixed inset-0 bg-background z-50 p-4 overflow-y-auto">
-                    <button onClick={() => setSelectedId(null)} className="font-bold mb-4">← Back to list</button>
+                <motion.div 
+                    key={selectedPrescription.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="hidden md:hidden xl:block xl:col-span-2"
+                >
                     <PrescriptionDetailView prescription={selectedPrescription} />
+                </motion.div>
+            )}
+
+            {/* Tablet Stack-wise Detail View (newly added) */}
+            {selectedPrescription && (
+                <motion.div
+                    key={selectedPrescription.id + '-tablet'}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="hidden md:block xl:hidden"
+                >
+                    <PrescriptionDetailView prescription={selectedPrescription} />
+                </motion.div>
+            )}
+
+            {/* Mobile Modal (re-introduced) */}
+            {selectedPrescription && (
+                <div className="md:hidden fixed inset-0 bg-background z-50 p-4 overflow-y-auto">
+                    <button onClick={() => setSelectedId(null)} className="font-bold mb-4 px-4">← Back to list</button>
+                    <div className="max-w-md mx-auto">
+                        <PrescriptionDetailView prescription={selectedPrescription} />
+                    </div>
                 </div>
             )}
         </div>
