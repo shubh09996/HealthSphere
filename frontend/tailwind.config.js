@@ -18,6 +18,24 @@ export default {
         border: 'hsl(var(--border))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        // Global Gradient for HealthSphere Logo Text
+        'hs-gradient-start': '#0096C7',
+        'hs-gradient-middle': '#2A9D8F',
+        'hs-gradient-end': '#7E57C2',
+        // Core Application Blue (from screenshot)
+        'app-blue': '#3B82F6',
+        'app-blue-hover': '#2563EB',
+        // Login Page Specific Colors (refined to match screenshot)
+        'app-light-blue-bg': '#F8FAFC',
+        'login-card-dark-bg': '#1A202C',
+        'login-input-bg': '#FFFFFF',
+        'login-input-dark-bg': '#2D3748',
+        'login-text-muted': '#6B7280',
+        'login-demo-free-bg': '#FFFFFF',
+        'login-demo-free-text': '#4B5563',
+        'login-demo-premium-bg': '#FCD34D',
+        'login-demo-premium-text': '#92400E',
+        'login-demo-dark-bg': '#2D3748',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
