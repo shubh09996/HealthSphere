@@ -3,7 +3,7 @@ import { Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const Header = ({ theme, toggleTheme }) => {
+const Navbar = ({ theme, toggleTheme }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex justify-between items-center">
@@ -45,4 +45,4 @@ const Header = ({ theme, toggleTheme }) => {
   );
 };
 
-export default Header;
+export default Navbar;
