@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
-    Stethoscope, User, Briefcase, Heart, Shield, Eye, EyeOff, Mail, Lock, Building, CheckCircle, Hospital, ClipboardList, ShieldCheck, HeartHandshake, Sparkles 
+    Stethoscope, User, Heart, Shield, Eye, EyeOff, Mail, Lock, Building, ShieldCheck, HeartHandshake, Sparkles 
 } from 'lucide-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-// A simple Google Icon component since it's not in Lucide
-// const GoogleIcon = () => (
-//     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-//         <path d="M12.24 10.29v3.45h5.18c-.28 1.41-1.01 2.37-2.19 3.06-.52.33-1.12.56-1.76.7V21h3.31c2.05-1.92 3.23-4.63 3.23-8s-1.18-6.08-3.23-8h-3.31v2.99c.64.14 1.24.37 1.76.7 1.18.69 1.91 1.65 2.19 3.06z" fill="#4285F4"/>
-//         <path d="M10.53 18.06c-1.18.69-2.6 1.13-4.11 1.13-3.1 0-5.74-2.2-6.66-5.11H-.01v2.99c.92 2.91 3.56 5.11 6.66 5.11 1.51 0 2.93-.44 4.11-1.13z" fill="#34A853"/>
-//         <path d="M4.42 12c0-1.51.44-2.93 1.13-4.11L2.12 4.41C1.03 5.5 0 6.8 0 8.35c0 2.91 2.2 5.55 5.11 6.66h2.99l-2.68-2.68c-.69-1.18-1.13-2.6-1.13-4.11z" fill="#FBBC05"/>
-//         <path d="M12.24 6.94v-3.45H7.06c-.28-1.41-1.01-2.37-2.19-3.06C4.35 0.01 3.75-.22 3.11-.36V0h-3.31c2.05 1.92 3.23 4.63 3.23 8s-1.18 6.08-3.23 8h3.31V6.94c.64.14 1.24.37 1.76.7 1.18.69 1.91 1.65 2.19 3.06z" fill="#EA4335"/>
-//     </svg>
-// );
+// Self-contained Google Icon to remove dependency errors
+const GoogleIcon = () => (
+    <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" fill="#FFC107"/>
+        <path d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" fill="#FF3D00"/>
+        <path d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" fill="#4CAF50"/>
+        <path d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C42.022,35.244,44,30.036,44,24C44,22.659,43.862,21.35,43.611,20.083z" fill="#1976D2"/>
+    </svg>
+);
 
 // Data for role selection
 const roleData = {
@@ -69,7 +67,6 @@ const PasswordStrengthMeter = ({ password }) => {
 };
 
 const SignupPage = () => {
-    const [role, setRole] = useState('patient');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -85,7 +82,6 @@ const SignupPage = () => {
         visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
     };
     
-    // Using a simpler animation for the left panel features
     const featureItemVariants = {
         hidden: { opacity: 0, x: -20 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
@@ -93,54 +89,52 @@ const SignupPage = () => {
 
     return (
         <motion.div
-            className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden"
+            className="min-h-screen relative flex items-start justify-center p-4 pt-20 pb-8 overflow-x-hidden"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
-            {/* Reusing the dynamic background from the login page for consistency */}
-            {/* Note: This is a simplified representation. The actual DynamicBackground component would be imported. */}
             <div className="absolute inset-0 z-0 overflow-hidden">
-                <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-hs-gradient-start rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob" />
-                <motion.div className="absolute top-1/2 right-1/4 w-80 h-80 bg-hs-gradient-middle rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
-                <motion.div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-hs-gradient-end rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob animation-delay-4000" />
+                <motion.div className="absolute top-1/4 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-hs-gradient-start rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob" />
+                <motion.div className="absolute top-1/2 right-1/4 w-64 h-64 sm:w-80 sm:h-80 bg-hs-gradient-middle rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob animation-delay-2000" />
+                <motion.div className="absolute bottom-1/4 left-1/3 w-56 h-56 sm:w-72 sm:h-72 bg-hs-gradient-end rounded-full mix-blend-multiply filter blur-2xl opacity-30 dark:opacity-20 animate-blob animation-delay-4000" />
             </div>
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-center max-w-6xl w-full gap-8">
-                {/* Left Promotional Panel - Now focused on Trust and Benefits */}
+            <div className="relative z-10 flex flex-col xl:flex-row items-stretch justify-center w-full max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl gap-4 lg:gap-8">
+                {/* Left Promotional Panel */}
                 <motion.div
-                    className="lg:w-1/2 p-8 lg:p-12 bg-card rounded-2xl shadow-2xl border border-border flex flex-col justify-center space-y-8 backdrop-blur-md dark:bg-card/70"
+                    className="xl:w-1/2 p-6 bg-card rounded-2xl shadow-2xl border border-border flex flex-col justify-center space-y-3 backdrop-blur-md dark:bg-card/70"
                     variants={itemVariants}
                 >
-                     <div className="flex items-center space-x-2 mb-4">
+                     <div className="flex items-center space-x-2">
                         <div className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end p-2 rounded-md">
                             <span className="text-primary-foreground font-bold text-lg">H</span>
                         </div>
                         <span className="text-2xl font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">HealthSphere</span>
                     </div>
 
-                    <h2 className="text-4xl font-extrabold text-foreground">Join Our Community</h2>
-                    <p className="text-muted-foreground text-lg">Your health, secured and simplified. Create an account to get started.</p>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">Join Our Community</h2>
+                    <p className="text-muted-foreground text-base sm:text-lg">Your health, secured and simplified. Create an account to get started.</p>
 
-                    <motion.div className="space-y-6" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
+                    <motion.div className="space-y-5" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
                         <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
                             <ShieldCheck size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
                             <div>
-                                <h3 className="text-xl font-semibold text-foreground">Data Privacy First</h3>
+                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Data Privacy First</h3>
                                 <p className="text-muted-foreground text-sm">Your health data is encrypted and secure with us.</p>
                             </div>
                         </motion.div>
                         <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
                             <HeartHandshake size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
                             <div>
-                                <h3 className="text-xl font-semibold text-foreground">Community Trust</h3>
+                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Community Trust</h3>
                                 <p className="text-muted-foreground text-sm">Join thousands of patients, doctors, and donors.</p>
                             </div>
                         </motion.div>
                          <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
                             <Sparkles size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
                             <div>
-                                <h3 className="text-xl font-semibold text-foreground">Seamless Experience</h3>
+                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Seamless Experience</h3>
                                 <p className="text-muted-foreground text-sm">A unified platform for all your healthcare needs.</p>
                             </div>
                         </motion.div>
@@ -149,11 +143,10 @@ const SignupPage = () => {
 
                 {/* Right Signup Form */}
                 <motion.div
-                    className="lg:w-1/2 p-8 lg:p-12 bg-card rounded-2xl shadow-2xl border border-border flex flex-col justify-center space-y-6 backdrop-blur-md dark:bg-card/70"
+                    className="xl:w-1/2 p-6 bg-card rounded-2xl shadow-2xl border border-border flex flex-col justify-center space-y-3 backdrop-blur-md dark:bg-card/70"
                     variants={itemVariants}
                 >
-                    <h2 className="text-4xl font-extrabold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">Create Account</h2>
-                    
+                    <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text text-center">Create Account</h2>
                     
                     <div className="flex items-center gap-2">
                         <div className="flex-grow border-t border-border"></div>
@@ -202,17 +195,17 @@ const SignupPage = () => {
                         Create Account
                     </motion.button>
 
-                    <div className="flex items-center gap-2 mt-4">
+                    <div className="flex items-center gap-2">
                         <div className="flex-grow border-t border-border"></div>
                         <span className="text-muted-foreground text-xs">OR CONTINUE WITH</span>
                         <div className="flex-grow border-t border-border"></div>
                     </div>
                     <motion.button className="w-full flex items-center justify-center gap-3 py-3 border border-border rounded-lg bg-background hover:bg-muted transition-colors dark:bg-muted/30 dark:hover:bg-muted/50" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                        <FontAwesomeIcon icon={faGoogle} className="text-xl" />
+                        <GoogleIcon />
                         <span className="font-semibold text-foreground">Sign up with Google</span>
                     </motion.button>
 
-                    <p className="text-center text-muted-foreground text-base">
+                    <p className="text-center text-muted-foreground text-sm sm:text-base">
                         Already have an account? 
                         <a href="#" className="font-medium bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text hover:underline ml-1">
                             Sign In
@@ -225,3 +218,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+

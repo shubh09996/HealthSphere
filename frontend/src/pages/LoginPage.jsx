@@ -79,22 +79,24 @@ const LoginPage = () => {
 
     return (
         <motion.div
-            className="min-h-screen flex items-center justify-center bg-background p-4 font-sans"
+            // FIX: Adjusted padding to remove gap below navbar
+            className="min-h-screen flex flex-col items-center justify-start bg-background px-4 pt-24 pb-10 sm:px-6 lg:px-8 font-sans overflow-y-auto"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
-            <div className="flex flex-col lg:flex-row items-stretch justify-center max-w-6xl w-full gap-8">
+            {/* FIX: Removed flex-grow to stop vertical centering */}
+            <div className="flex flex-col xl:flex-row items-stretch justify-center max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl w-full gap-4 sm:gap-8">
                 {/* Left Promotional Panel - Dynamic */}
                 <motion.div
-                    className="lg:w-1/2 p-8 lg:p-12 bg-card rounded-2xl shadow-xl border border-border flex flex-col justify-center"
+                    className="w-full xl:w-1/2 p-6 md:p-8 bg-card rounded-2xl shadow-xl border border-border flex flex-col justify-center flex-shrink-0"
                     variants={itemVariants}
                 >
                     <div className="flex items-center space-x-2 mb-6">
                         <div className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end p-2 rounded-md">
                             <span className="text-primary-foreground font-bold text-lg">H</span>
                         </div>
-                        <span className="text-2xl font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">HealthSphere</span>
+                        <span className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">HealthSphere</span>
                     </div>
 
                     <AnimatePresence mode="wait">
@@ -105,14 +107,14 @@ const LoginPage = () => {
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <h2 className="text-3xl font-bold text-foreground mb-3">{selectedRoleData.welcome}</h2>
-                            <p className="text-muted-foreground text-lg mb-8">{selectedRoleData.subtext}</p>
-                            <div className="space-y-6">
+                            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">{selectedRoleData.welcome}</h2>
+                            <p className="text-base sm:text-lg text-muted-foreground mb-6">{selectedRoleData.subtext}</p>
+                            <div className="space-y-5">
                                 {selectedRoleData.features.map((feature, index) => (
                                     <div key={index} className="flex items-start space-x-4">
                                         <feature.icon size={24} className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text flex-shrink-0 mt-1" />
                                         <div>
-                                            <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
+                                            <h3 className="text-base sm:text-lg font-semibold text-foreground">{feature.title}</h3>
                                             <p className="text-muted-foreground text-sm">{feature.desc}</p>
                                         </div>
                                     </div>
@@ -124,14 +126,14 @@ const LoginPage = () => {
 
                 {/* Right Login Form */}
                 <motion.div
-                    className="lg:w-1/2 p-8 lg:p-12 bg-card rounded-2xl shadow-xl border border-border flex flex-col justify-center space-y-6"
+                    className="w-full xl:w-1/2 p-6 md:p-8 bg-card rounded-2xl shadow-xl border border-border flex flex-col justify-start space-y-5 flex-shrink-0"
                     variants={itemVariants}
                 >
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">Sign In</h2>
-                    <p className="text-muted-foreground">Choose your role and sign in to continue</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">Sign In</h2>
+                    <p className="text-muted-foreground text-sm sm:text-base">Choose your role and sign in to continue</p>
 
                     {/* Role Selection */}
-                    <div className="relative flex flex-wrap gap-x-4 gap-y-2 border-b border-border pb-2">
+                    <div className="relative flex flex-wrap justify-center sm:justify-start gap-x-3 sm:gap-x-4 gap-y-2 border-b border-border pb-2">
                         {Object.keys(roleData).map((r) => {
                             const RoleIcon = roleData[r].icon;
                             return (
@@ -161,7 +163,7 @@ const LoginPage = () => {
                             type="email"
                             id="email"
                             placeholder="your.email@example.com"
-                            className="w-full p-3 pl-10 pr-10 border border-border rounded-md bg-transparent text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-hs-gradient-middle"
+                            className="w-full p-3 pl-10 pr-10 border border-border rounded-md bg-transparent text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-hs-gradient-middle text-sm sm:text-base"
                         />
                         <Mail size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-hs-gradient-middle transition-colors" />
                     </div>
@@ -171,7 +173,7 @@ const LoginPage = () => {
                             type={showPassword ? 'text' : 'password'}
                             id="password"
                             placeholder="Enter your password"
-                            className="w-full p-3 pl-10 pr-10 border border-border rounded-md bg-transparent text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-hs-gradient-middle"
+                            className="w-full p-3 pl-10 pr-10 border border-border rounded-md bg-transparent text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-hs-gradient-middle text-sm sm:text-base"
                         />
                         <Lock size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-hs-gradient-middle transition-colors" />
                         <motion.button
@@ -184,7 +186,7 @@ const LoginPage = () => {
                         </motion.button>
                     </div>
 
-                    <div className="flex justify-between items-center text-sm">
+                    <div className="flex justify-between items-center text-xs sm:text-sm">
                         <label className="flex items-center space-x-2 text-muted-foreground cursor-pointer">
                             <input type="checkbox" className="form-checkbox rounded text-hs-gradient-middle focus:ring-hs-gradient-middle border-border" />
                             <span>Remember me</span>
@@ -202,11 +204,11 @@ const LoginPage = () => {
                         Sign In
                     </motion.button>
 
-                    <p className="text-center text-muted-foreground text-sm">
+                    <p className="text-center text-muted-foreground text-xs sm:text-sm">
                         Don't have an account? 
-                        <a href="#" className="font-medium bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text hover:underline ml-1">
-                            <Link to="/signup" className="font-medium bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text hover:underline">Sign up</Link>
-                        </a>
+                        <Link to="/signup" className="font-medium bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text hover:underline ml-1">
+                            Sign up
+                        </Link>
                     </p>
                 </motion.div>
             </div>
@@ -215,3 +217,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
