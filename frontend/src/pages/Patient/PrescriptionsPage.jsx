@@ -1,10 +1,104 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
+import { prescriptionsData } from '../../data/prescriptionsData.js';
+import PrescriptionListItem from '../../components/Patient/PrescriptionListItem.jsx';
+import PrescriptionDetailView from '../../components/Patient/PrescriptionDetailView.jsx';
+import { Search, ListFilter } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const PrescriptionsPage = () => {
+    const [selectedId, setSelectedId] = useState(prescriptionsData[0]?.id || null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filter, setFilter] = useState('All'); // All, Active, Expired
+
+    const filteredPrescriptions = useMemo(() => {
+        return prescriptionsData
+            .filter(p => {
+                if (filter === 'Active') return new Date(p.expiryDate) >= new Date();
+                if (filter === 'Expired') return new Date(p.expiryDate) < new Date();
+                return true;
+            })
+            .filter(p => 
+                p.doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.medicines.some(med => med.name.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+    }, [searchTerm, filter]);
+    
+    const selectedPrescription = useMemo(() => {
+        return prescriptionsData.find(p => p.id === selectedId);
+    }, [selectedId]);
+
     return (
-        <div className="bg-card p-6 rounded-xl shadow-md">
-            <h1 className="text-3xl font-bold text-foreground">My Prescriptions</h1>
-            <p className="text-muted-foreground mt-2">Access all your e-prescriptions here. You can download them as PDF.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[calc(100vh-100px)]">
+            {/* Left Column: List & Filters */}
+            <div className="lg:col-span-1 flex flex-col h-full">
+                <div>
+                    <h1 className="text-3xl font-bold text-foreground">My Prescriptions</h1>
+                    <p className="text-muted-foreground mt-1">View and manage all your e-prescriptions.</p>
+                </div>
+                
+                {/* Search & Filter Controls */}
+                <div className="flex gap-2 my-4">
+                    <div className="relative flex-1">
+                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                         <input
+                            type="text"
+                            placeholder="Search by doctor or medicine..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full bg-background border border-border rounded-lg pl-10 pr-4 py-2 text-sm"
+                        />
+                    </div>
+                    {/* Simple filter buttons */}
+                    <div className="flex border border-border rounded-lg p-1 bg-muted">
+                        {['All', 'Active', 'Expired'].map(f => (
+                            <button key={f} onClick={() => setFilter(f)} 
+                                className={`px-3 py-1 text-sm font-semibold rounded-md transition-colors ${filter === f ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'}`}>
+                                {f}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Prescriptions List */}
+                <div className="flex-1 overflow-y-auto pr-2 space-y-3">
+                    <AnimatePresence>
+                         {filteredPrescriptions.length > 0 ? (
+                            filteredPrescriptions.map(p => (
+                                <motion.div
+                                    key={p.id}
+                                    layout
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, x: -10 }}
+                                >
+                                    <PrescriptionListItem 
+                                        prescription={p}
+                                        onSelect={setSelectedId}
+                                        isActive={selectedId === p.id}
+                                    />
+                                </motion.div>
+                            ))
+                         ) : (
+                             <div className="text-center py-12 text-muted-foreground">
+                                <p>No prescriptions found.</p>
+                             </div>
+                         )}
+                    </AnimatePresence>
+                </div>
+            </div>
+
+            {/* Right Column: Detail View */}
+            <div className="lg:col-span-2 h-full hidden lg:block">
+                 <PrescriptionDetailView prescription={selectedPrescription} />
+            </div>
+
+            {/* Modal for Mobile View */}
+            {selectedPrescription && (
+                <div className="lg:hidden fixed inset-0 bg-background z-50 p-4 overflow-y-auto">
+                    <button onClick={() => setSelectedId(null)} className="font-bold mb-4">← Back to list</button>
+                    <PrescriptionDetailView prescription={selectedPrescription} />
+                </div>
+            )}
         </div>
     );
 };

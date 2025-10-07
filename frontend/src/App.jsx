@@ -6,14 +6,15 @@ import PublicLayout from './components/Patient/PublicLayout.jsx';
 import PatientDashboardLayout from './components/Patient/PatientDashboardLayout.jsx';
 
 // Public Pages
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 
 // Patient Pages
 import PatientDashboardPage from './pages/Patient/DashboardPage.jsx';
-import AppointmentsPage from './pages/patient/AppointmentsPage';
-import PrescriptionsPage from './pages/patient/PrescriptionsPage';
+import AppointmentsPage from './pages/Patient/AppointmentsPage.jsx';
+import PrescriptionsPage from './pages/Patient/PrescriptionsPage.jsx';
+import BookAppointmentPage from './pages/Patient/BookAppointmentPage.jsx'; // Booking page ko import karein
 
 // Placeholder for other pages
 const Placeholder = ({ title }) => (
@@ -40,6 +41,8 @@ function App() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<PatientDashboardPage />} />
           <Route path="appointments" element={<AppointmentsPage />} />
+          {/* Booking page ke liye naya route */}
+          <Route path="book-appointment" element={<BookAppointmentPage />} /> 
           <Route path="prescriptions" element={<PrescriptionsPage />} />
           <Route path="medicine-finder" element={<Placeholder title="Medicine Finder" />} />
           <Route path="health-records" element={<Placeholder title="Health Records" />} />
