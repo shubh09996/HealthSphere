@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-    Stethoscope, User, Heart, Shield, Eye, EyeOff, Mail, Lock, Building, ShieldCheck, HeartHandshake, Sparkles 
+    Stethoscope, User, Heart, Shield, Eye, EyeOff, Mail, Lock, Building, ShieldCheck, HeartHandshake, Sparkles, TestTube2, BriefcaseMedical, FileText
 } from 'lucide-react';
 
 // Self-contained Google Icon to remove dependency errors
@@ -16,12 +16,62 @@ const GoogleIcon = () => (
 
 // Data for role selection
 const roleData = {
-    patient: { icon: User },
-    doctor: { icon: Stethoscope },
-    shop: { icon: Building },
-    donor: { icon: Heart },
-    admin: { icon: Shield }
+    patient: { icon: User, label: 'Patient' },
+    doctor: { icon: Stethoscope, label: 'Doctor' },
+    shop: { icon: Building, label: 'Shop' },
+    donor: { icon: Heart, label: 'Donor' },
+    admin: { icon: Shield, label: 'Admin' }
 };
+
+// Mock data for the left promotional panel based on role
+const roleInfo = {
+    patient: {
+        title: 'Access your Health Profile',
+        description: 'Book appointments, view prescriptions, and track your health journey.',
+        features: [
+            { icon: Sparkles, title: 'Smart Token System', text: 'Real-time queue tracking with wait time estimates.' },
+            { icon: FileText, title: 'E-Prescriptions', text: 'Digital prescriptions with automatic verification.' },
+            { icon: ShieldCheck, title: 'Secure Health Records', text: 'Your health data is encrypted and secure with us.' }
+        ]
+    },
+    doctor: {
+        title: 'Manage Your Practice',
+        description: 'Streamline patient management, consultations, and prescriptions.',
+        features: [
+            { icon: BriefcaseMedical, title: 'Efficient Patient Queue', text: 'Manage appointments and reduce patient wait times.' },
+            { icon: FileText, title: 'Digital Prescriptions', text: 'Create and share e-prescriptions effortlessly.' },
+            { icon: User, title: 'Patient Record Access', text: 'Securely access and update patient health records.' }
+        ]
+    },
+    shop: {
+        title: 'Pharmacy & Lab Portal',
+        description: 'Manage inventory, process orders, and connect with customers.',
+        features: [
+            { icon: TestTube2, title: 'Prescription Verification', text: 'Verify digital prescriptions instantly and securely.' },
+            { icon: Building, title: 'Inventory Management', text: 'Track your stock and manage orders seamlessly.' },
+            { icon: Sparkles, title: 'Wider Customer Reach', text: 'Connect with a larger network of patients.' }
+        ]
+    },
+    donor: {
+        title: 'Become a Lifesaver',
+        description: 'Join our donor network to contribute and save lives.',
+        features: [
+            { icon: HeartHandshake, title: 'Find Donation Camps', text: 'Locate nearby blood or organ donation drives.' },
+            { icon: ShieldCheck, title: 'Verified Requests', text: 'Connect with verified patients in need of donations.' },
+            { icon: User, title: 'Donor Community', text: 'Be a part of a community making a difference.' }
+        ]
+    },
+    admin: {
+        title: 'Administrator Dashboard',
+        description: 'Oversee the platform, manage users, and ensure smooth operations.',
+        features: [
+            { icon: Shield, title: 'User Management', text: 'Manage roles and permissions for all users.' },
+            { icon: Stethoscope, title: 'Platform Health', text: 'Monitor the system analytics and performance.' },
+            { icon: Sparkles, title: 'Content Moderation', text: 'Ensure the quality and safety of platform content.' }
+        ]
+    }
+};
+
 
 const PasswordStrengthMeter = ({ password }) => {
     const [strength, setStrength] = useState({ score: 0, label: 'Weak', color: 'bg-red-500' });
@@ -71,6 +121,9 @@ const SignupPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [selectedRole, setSelectedRole] = useState('patient'); // State for selected role
+
+    const currentRoleInfo = roleInfo[selectedRole];
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -101,43 +154,31 @@ const SignupPage = () => {
             </div>
 
             <div className="relative z-10 flex flex-col xl:flex-row items-stretch justify-center w-full max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl gap-4 lg:gap-8">
-                {/* Left Promotional Panel */}
+                {/* Left Promotional Panel (Now Dynamic) */}
                 <motion.div
                     className="xl:w-1/2 p-6 bg-card rounded-2xl shadow-2xl border border-border flex flex-col justify-center space-y-3 backdrop-blur-md dark:bg-card/70"
                     variants={itemVariants}
                 >
                      <div className="flex items-center space-x-2">
-                        <div className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end p-2 rounded-md">
-                            <span className="text-primary-foreground font-bold text-lg">H</span>
-                        </div>
-                        <span className="text-2xl font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">HealthSphere</span>
-                    </div>
+                         <div className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end p-2 rounded-md">
+                             <span className="text-primary-foreground font-bold text-lg">H</span>
+                         </div>
+                         <span className="text-2xl font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">HealthSphere</span>
+                     </div>
 
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">Join Our Community</h2>
-                    <p className="text-muted-foreground text-base sm:text-lg">Your health, secured and simplified. Create an account to get started.</p>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">{currentRoleInfo.title}</h2>
+                    <p className="text-muted-foreground text-base sm:text-lg">{currentRoleInfo.description}</p>
 
                     <motion.div className="space-y-5" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-                        <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
-                            <ShieldCheck size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
-                            <div>
-                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Data Privacy First</h3>
-                                <p className="text-muted-foreground text-sm">Your health data is encrypted and secure with us.</p>
-                            </div>
-                        </motion.div>
-                        <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
-                            <HeartHandshake size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
-                            <div>
-                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Community Trust</h3>
-                                <p className="text-muted-foreground text-sm">Join thousands of patients, doctors, and donors.</p>
-                            </div>
-                        </motion.div>
-                         <motion.div className="flex items-start space-x-4" variants={featureItemVariants}>
-                            <Sparkles size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
-                            <div>
-                                <h3 className="text-lg sm:text-xl font-semibold text-foreground">Seamless Experience</h3>
-                                <p className="text-muted-foreground text-sm">A unified platform for all your healthcare needs.</p>
-                            </div>
-                        </motion.div>
+                        {currentRoleInfo.features.map((feature, index) => (
+                            <motion.div key={index} className="flex items-start space-x-4" variants={featureItemVariants}>
+                                <feature.icon size={24} className="text-hs-gradient-middle flex-shrink-0 mt-1" />
+                                <div>
+                                    <h3 className="text-lg sm:text-xl font-semibold text-foreground">{feature.title}</h3>
+                                    <p className="text-muted-foreground text-sm">{feature.text}</p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </motion.div>
 
@@ -148,10 +189,18 @@ const SignupPage = () => {
                 >
                     <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text text-center">Create Account</h2>
                     
-                    <div className="flex items-center gap-2">
-                        <div className="flex-grow border-t border-border"></div>
-                        <span className="text-muted-foreground text-xs">OR SIGN UP WITH EMAIL</span>
-                        <div className="flex-grow border-t border-border"></div>
+                    <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:flex xl:flex-row xl:justify-center border-b border-border pb-2">
+                        {Object.entries(roleData).map(([key, { icon: Icon, label }]) => (
+                            <button
+                                key={key}
+                                onClick={() => setSelectedRole(key)}
+                                className={`relative flex items-center justify-center gap-2 py-3 px-2 text-sm font-semibold transition-colors ${selectedRole === key ? 'text-primary' : 'text-muted-foreground hover:text-foreground'} ${key === 'admin' ? 'col-span-2 mx-auto' : ''}`}
+                            >
+                                <Icon size={16} />
+                                <span>{label}</span>
+                                {selectedRole === key && <motion.div layoutId="role-indicator" className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-primary" />}
+                            </button>
+                        ))}
                     </div>
 
                     {/* Form Inputs */}
@@ -218,4 +267,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-

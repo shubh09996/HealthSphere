@@ -11,7 +11,10 @@ const PatientDashboardPage = () => {
             <PremiumBanner />
 
             <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Welcome back, Ravi! 👋</h1>
+                {/* === CHANGE IS HERE === */}
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">
+                    Welcome back, Ravi! 👋
+                </h1>
                 <p className="text-sm sm:text-base text-muted-foreground mt-1">Here's your health overview for today</p>
             </div>
 

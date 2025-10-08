@@ -13,7 +13,8 @@ const SettingsPage = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+                {/* === IS LINE MEIN GRADIENT LAGAYA HAI === */}
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">Settings</h1>
                 <p className="text-muted-foreground mt-1">Manage your account, profile, and notification preferences.</p>
             </div>
 

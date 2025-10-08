@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Calendar, FileText, Pill, BarChart2, CreditCard, Settings, LifeBuoy, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
-const SidebarNavLink = ({ to, icon: Icon, text, isCollapsed }) => (
+const SidebarNavLink = ({ to, icon: Icon, text, isCollapsed, onCloseMobileSidebar }) => (
     <NavLink
         to={to}
         className={({ isActive }) =>
@@ -14,6 +14,7 @@ const SidebarNavLink = ({ to, icon: Icon, text, isCollapsed }) => (
                 : 'text-muted-foreground hover:bg-muted hover:text-foreground'
             }`
         }
+        onClick={onCloseMobileSidebar} // Close mobile sidebar on link click
     >
         <Icon size={22} className="flex-shrink-0" />
         {/* Text ko conditionally render kiya gaya hai */}
@@ -51,6 +52,7 @@ const PatientSidebar = ({ isCollapsed, toggleCollapse, onCloseMobileSidebar }) =
                         icon={item.icon}
                         text={item.text}
                         isCollapsed={isCollapsed}
+                        onCloseMobileSidebar={onCloseMobileSidebar} // Pass this prop down
                     />
                 ))}
             </nav>

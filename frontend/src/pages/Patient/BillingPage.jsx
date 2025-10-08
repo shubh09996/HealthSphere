@@ -20,16 +20,17 @@ const BillingPage = () => {
     const [activeTab, setActiveTab] = useState('invoices');
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 overflow-x-hidden">
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-foreground">Billing & Payments</h1>
+                {/* === IS LINE MEIN GRADIENT LAGAYA HAI === */}
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">Billing & Payments</h1>
                 <p className="text-muted-foreground mt-1">Manage your invoices, payments, and insurance.</p>
             </div>
 
             {/* Overview Section */}
             <motion.div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                className="grid grid-cols-1 md:grid-cols-1 gap-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -45,7 +46,7 @@ const BillingPage = () => {
             </motion.div>
 
             {/* Tab Navigation */}
-            <div className="flex border-b border-border">
+            <div className="flex flex-col md:flex-row border-b border-border">
                 {tabs.map(tab => (
                     <button
                         key={tab.id}

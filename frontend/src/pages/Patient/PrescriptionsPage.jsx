@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react'; // useEffect import kiya
 import { prescriptionsData } from '../../data/prescriptionsData.js';
 import PrescriptionListItem from '../../components/Patient/PrescriptionListItem.jsx';
 import PrescriptionDetailView from '../../components/Patient/PrescriptionDetailView.jsx';
@@ -6,9 +6,20 @@ import { Search, ListFilter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PrescriptionsPage = () => {
+    // 1. Default state ab null hai taaki mobile par kuch select na ho
     const [selectedId, setSelectedId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [filter, setFilter] = useState('All'); // All, Active, Expired
+
+    // 2. Yeh effect sirf desktop/tablet par default selection set karega
+    useEffect(() => {
+        // Tailwind ke 'md' breakpoint (768px) se check kar rahe hain
+        const isDesktopOrTablet = window.matchMedia('(min-width: 768px)').matches;
+        
+        if (isDesktopOrTablet) {
+            setSelectedId(prescriptionsData[0]?.id || null);
+        }
+    }, []); // Empty array ka matlab yeh code sirf ek baar page load hone par chalega
 
     const filteredPrescriptions = useMemo(() => {
         return prescriptionsData
@@ -32,7 +43,7 @@ const PrescriptionsPage = () => {
             {/* Left Column: List & Filters */}
             <div className="flex flex-col xl:col-span-1">
                 <div>
-                    <h1 className="text-3xl font-bold text-foreground">My Prescriptions</h1>
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">My Prescriptions</h1>
                     <p className="text-muted-foreground mt-1">View and manage all your e-prescriptions.</p>
                 </div>
                 
@@ -80,7 +91,7 @@ const PrescriptionsPage = () => {
                             ))
                          ) : (
                              <div className="text-center py-12 text-muted-foreground">
-                                <p>No prescriptions found.</p>
+                                 <p>No prescriptions found.</p>
                              </div>
                          )}
                     </AnimatePresence>

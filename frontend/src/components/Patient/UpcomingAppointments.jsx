@@ -6,7 +6,8 @@ const UpcomingAppointments = () => {
         <div className="bg-card p-4 sm:p-6 rounded-xl border border-border shadow-sm">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg sm:text-xl font-bold text-foreground">Upcoming Appointments</h2>
-                <button className="bg-blue-500 text-white font-bold py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg hover:bg-blue-600 transition-colors text-sm flex items-center gap-2">
+                {/* === BOOK NEW BUTTON PE GRADIENT LAGAYA HAI === */}
+                <button className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white font-bold py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg shadow-md hover:opacity-90 transition-opacity text-sm flex items-center gap-2">
                     <Calendar size={16} /> Book New
                 </button>
             </div>

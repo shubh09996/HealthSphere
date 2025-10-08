@@ -37,7 +37,7 @@ const PatientDashboardLayout = () => {
                         className={`fixed top-0 left-0 h-full w-64 bg-card transition-transform duration-300 ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <PatientSidebar isCollapsed={false} />
+                        <PatientSidebar isCollapsed={false} onCloseMobileSidebar={() => setIsMobileSidebarOpen(false)} />
                     </div>
                 </div>
 
