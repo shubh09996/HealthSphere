@@ -2,7 +2,7 @@ import React from 'react';
 import { Search, Bell, Menu, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext.jsx';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const { theme, toggleTheme } = useTheme();
@@ -52,19 +52,21 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
                     {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                 </motion.button>
 
-                {/* Notification Icon */}
-                <div className="relative cursor-pointer">
+                {/* UPDATED: Notification Icon is now a Link */}
+                <Link to="/patient/notifications" className="relative cursor-pointer">
                     <Bell size={22} className="text-foreground" />
                     <span className="absolute -top-1 -right-1 flex h-4 w-4">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 items-center justify-center text-white text-xs">4</span>
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500 items-center justify-center text-white text-xs">2</span>
                     </span>
-                </div>
+                </Link>
 
                 {/* Profile Icon */}
-                <div className="w-9 h-9 rounded-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end flex items-center justify-center text-white font-bold cursor-pointer">
-                    R
-                </div>
+                <Link to="/patient/profile" className="group">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end flex items-center justify-center text-white font-bold cursor-pointer ring-2 ring-offset-2 ring-offset-card ring-transparent group-hover:ring-primary transition-all">
+                        R
+                    </div>
+                </Link>
             </div>
         </header>
     );

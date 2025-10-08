@@ -19,8 +19,10 @@ import MedicineFinderPage from './pages/patient/MedicineFinderPage.jsx';
 import MedicineDetailPage from './pages/patient/MedicineDetailPage.jsx';
 import HealthRecordsPage from './pages/patient/HealthRecordsPage.jsx';
 import BillingPage from './pages/patient/BillingPage.jsx';
+import PatientProfilePage from './pages/patient/PatientProfilePage.jsx';
+import NotificationsPage from './pages/patient/NotificationsPage.jsx'; // NEW: Notifications page import
 
-// NEW: Settings page and its nested components
+// Settings Pages
 import SettingsPage from './pages/patient/SettingsPage.jsx';
 import ProfileSettings from './components/patient/settings/ProfileSettings.jsx';
 import SecuritySettings from './components/patient/settings/SecuritySettings.jsx';
@@ -49,8 +51,11 @@ function App() {
           <Route path="medicine-finder/:medicineId" element={<MedicineDetailPage />} />
           <Route path="health-records" element={<HealthRecordsPage />} />
           <Route path="billing" element={<BillingPage />} />
+          <Route path="profile" element={<PatientProfilePage />} />
+          
+          {/* UPDATED: Route for the Notifications Page */}
+          <Route path="notifications" element={<NotificationsPage />} />
 
-          {/* UPDATED: Functional nested routes for Settings */}
           <Route path="settings" element={<SettingsPage />}>
             <Route index element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<ProfileSettings />} />
