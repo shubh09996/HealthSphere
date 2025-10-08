@@ -20,13 +20,11 @@ import MedicineDetailPage from './pages/patient/MedicineDetailPage.jsx';
 import HealthRecordsPage from './pages/patient/HealthRecordsPage.jsx';
 import BillingPage from './pages/patient/BillingPage.jsx';
 
-// Placeholder for other pages
-const Placeholder = ({ title }) => (
-    <div className="bg-card p-6 rounded-xl shadow-md">
-        <h1 className="text-3xl font-bold text-foreground">{title}</h1>
-        <p className="text-muted-foreground mt-2">This is a placeholder page for {title}.</p>
-    </div>
-);
+// NEW: Settings page and its nested components
+import SettingsPage from './pages/patient/SettingsPage.jsx';
+import ProfileSettings from './components/patient/settings/ProfileSettings.jsx';
+import SecuritySettings from './components/patient/settings/SecuritySettings.jsx';
+import NotificationSettings from './components/patient/settings/NotificationSettings.jsx';
 
 
 function App() {
@@ -46,17 +44,20 @@ function App() {
           <Route path="dashboard" element={<PatientDashboardPage />} />
           <Route path="appointments" element={<AppointmentsPage />} />
           <Route path="book-appointment" element={<BookAppointmentPage />} /> 
-          <Route path="prescriptions" element={<PrescriptionsPage />} />
-          
+          <Route path="prescriptions" element={<PrescriptionsPage />} />          
           <Route path="medicine-finder" element={<MedicineFinderPage />} />
           <Route path="medicine-finder/:medicineId" element={<MedicineDetailPage />} />
-
           <Route path="health-records" element={<HealthRecordsPage />} />
-
-          {/* UPDATED: Functional route for Billing */}
           <Route path="billing" element={<BillingPage />} />
 
-          <Route path="settings" element={<Placeholder title="Settings" />} />
+          {/* UPDATED: Functional nested routes for Settings */}
+          <Route path="settings" element={<SettingsPage />}>
+            <Route index element={<Navigate to="profile" replace />} />
+            <Route path="profile" element={<ProfileSettings />} />
+            <Route path="security" element={<SecuritySettings />} />
+            <Route path="notifications" element={<NotificationSettings />} />
+          </Route>
+          
         </Route>
       </Routes>
     </div>

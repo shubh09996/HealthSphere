@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import InvoiceDetailModal from './InvoiceDetailModal';
 
 const statusStyles = {
@@ -9,18 +9,18 @@ const statusStyles = {
 };
 
 const MonthlySpendChart = ({ data }) => {
-    const maxAmount = Math.max(...data.map(d => d.amount));
+    const maxAmount = Math.max(...data.map(d => d.amount), 2000); // Set a minimum max for better visualization
     return (
         <div className="bg-muted p-4 rounded-lg">
             <h3 className="font-semibold text-foreground mb-4">Monthly Spend</h3>
             <div className="flex justify-around items-end h-32">
                 {data.map(item => (
-                    <div key={item.month} className="flex flex-col items-center">
+                    <div key={item.month} className="flex flex-col items-center group">
                         <motion.div 
-                            className="w-8 bg-primary/20 rounded-t-md"
+                            className="w-8 bg-primary/20 rounded-t-md group-hover:bg-primary/40"
                             initial={{ height: 0 }}
                             animate={{ height: `${(item.amount / maxAmount) * 100}%` }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.2, type: 'spring', stiffness: 100 }}
                         />
                         <p className="text-xs text-muted-foreground mt-1">{item.month}</p>
                     </div>
@@ -43,6 +43,7 @@ const InvoicesTab = ({ invoices, monthlySpend }) => {
                         onClick={() => setSelectedInvoice(invoice)}
                         className="bg-card p-4 border border-border rounded-xl flex justify-between items-center cursor-pointer hover:border-primary"
                         whileHover={{ scale: 1.02 }}
+                        layout
                     >
                         <div>
                             <p className="font-bold text-foreground">{invoice.id}</p>
