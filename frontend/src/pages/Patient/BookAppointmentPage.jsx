@@ -63,9 +63,9 @@ const BookAppointmentPage = () => {
     }
     
     return (
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 min-h-[70vh]">
+        <div className="flex flex-col gap-8 md:gap-12 min-h-[70vh]">
             {/* Left Column: Stepper */}
-            <div className="w-full md:w-1/3">
+            <div className="w-full">
                 <BookingStepper steps={steps} currentStep={progressStep} isFollowUp={isFollowUp} />
             </div>
 

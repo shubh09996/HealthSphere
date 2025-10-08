@@ -1,9 +1,11 @@
-import React from 'react';
-import { Sun, Moon } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ theme, toggleTheme }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex justify-between items-center">
@@ -17,30 +19,63 @@ const Navbar = ({ theme, toggleTheme }) => {
             </span>
           </Link>
         </div>
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>Features</motion.a>
           <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>Roles</motion.a>
           <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>About</motion.a>
         </nav>
+        
         <div className="flex items-center space-x-4">
           <motion.button onClick={toggleTheme} className="p-2 rounded-full text-foreground/70 hover:bg-muted hover:text-foreground transition-colors"
             whileHover={{ scale: 1.1, rotate: 15 }} transition={{ duration: 0.2 }}
           >
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </motion.button>
-          <motion.div
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 rounded-full text-foreground/70 hover:bg-muted hover:text-foreground transition-colors">
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+          {/* Desktop Login/Signup Buttons */}
+          <motion.div className="hidden md:block"
             whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}
           >
             <Link to="/login" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors">Login</Link>
           </motion.div>
-          <motion.button 
-            className="bg-gradient-to-r from-[#0096C7] via-[#2A9D8F] to-[#7E57C2] text-primary-foreground px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity"
+          <motion.button
+            className="hidden md:block bg-gradient-to-r from-[#0096C7] via-[#2A9D8F] to-[#7E57C2] text-primary-foreground px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity"
             whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}
           >
             <Link to="/signup" className="text-primary-foreground">Get Started</Link>
           </motion.button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border py-4 z-[60]"
+        >
+          <nav className="flex flex-col items-center space-y-4">
+            <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }} onClick={() => setIsMenuOpen(false)}>Features</motion.a>
+            <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }} onClick={() => setIsMenuOpen(false)}>Roles</motion.a>
+            <motion.a href="#" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }} onClick={() => setIsMenuOpen(false)}>About</motion.a>
+            <Link to="/login" className="text-black dark:text-foreground font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>Login</Link>
+            <motion.button
+              className="bg-gradient-to-r from-[#0096C7] via-[#2A9D8F] to-[#7E57C2] text-primary-foreground px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity w-full max-w-xs"
+              whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Link to="/signup" className="text-primary-foreground">Get Started</Link>
+            </motion.button>
+          </nav>
+        </motion.div>
+      )}
     </header>
   );
 };

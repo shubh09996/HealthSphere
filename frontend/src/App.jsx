@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
-import PublicLayout from './components/Patient/PublicLayout.jsx';
-import PatientDashboardLayout from './components/Patient/PatientDashboardLayout.jsx';
+import PublicLayout from './components/patient/PublicLayout.jsx';
+import PatientDashboardLayout from './components/patient/PatientDashboardLayout.jsx';
 
 // Public Pages
 import HomePage from './pages/HomePage.jsx';
@@ -11,12 +11,14 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 
 // Patient Pages
-import PatientDashboardPage from './pages/Patient/DashboardPage.jsx';
-import AppointmentsPage from './pages/Patient/AppointmentsPage.jsx';
-import BookAppointmentPage from './pages/Patient/BookAppointmentPage.jsx';
-import PrescriptionsPage from './pages/Patient/PrescriptionsPage.jsx';
-import MedicineFinderPage from './pages/Patient/MedicineFinderPage.jsx'; // NEW: Medicine Finder Search Page
-import MedicineDetailPage from './pages/Patient/MedicineDetailPage.jsx'; // NEW: Medicine Detail Page
+import PatientDashboardPage from './pages/patient/PatientDashboardPage.jsx';
+import AppointmentsPage from './pages/patient/AppointmentsPage.jsx';
+import BookAppointmentPage from './pages/patient/BookAppointmentPage.jsx';
+import PrescriptionsPage from './pages/patient/PrescriptionsPage.jsx';
+import MedicineFinderPage from './pages/patient/MedicineFinderPage.jsx';
+import MedicineDetailPage from './pages/patient/MedicineDetailPage.jsx';
+import HealthRecordsPage from './pages/patient/HealthRecordsPage.jsx';
+import BillingPage from './pages/patient/BillingPage.jsx';
 
 // Placeholder for other pages
 const Placeholder = ({ title }) => (
@@ -46,12 +48,14 @@ function App() {
           <Route path="book-appointment" element={<BookAppointmentPage />} /> 
           <Route path="prescriptions" element={<PrescriptionsPage />} />
           
-          {/* UPDATED: Functional routes for Medicine Finder */}
           <Route path="medicine-finder" element={<MedicineFinderPage />} />
           <Route path="medicine-finder/:medicineId" element={<MedicineDetailPage />} />
 
-          <Route path="health-records" element={<Placeholder title="Health Records" />} />
-          <Route path="billing" element={<Placeholder title="Billing" />} />
+          <Route path="health-records" element={<HealthRecordsPage />} />
+
+          {/* UPDATED: Functional route for Billing */}
+          <Route path="billing" element={<BillingPage />} />
+
           <Route path="settings" element={<Placeholder title="Settings" />} />
         </Route>
       </Routes>

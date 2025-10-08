@@ -3,18 +3,18 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 }, // Increased y for more noticeable slide
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }, // Longer duration
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 }, // Increased y for more noticeable slide
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }, // Longer duration
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
   };
 
   return (
     <motion.section
-      className="text-center py-8 md:py-12"
+      className="text-center py-8 md:py-12 px-4" // Horizontal padding added here
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -27,10 +27,11 @@ const Hero = () => {
         <span className="text-foreground/80 font-medium">Integrated Healthcare Platform</span>
       </motion.div>
       <motion.h1
-        className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#0096C7] via-[#2A9D8F] to-[#7E57C2] text-transparent bg-clip-text"
+        // Font sizes adjusted for responsiveness
+        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#0096C7] via-[#2A9D8F] to-[#7E57C2] text-transparent bg-clip-text"
         variants={itemVariants}
       >
-        Welcome to HealthSphere
+        Welcome to <span className="whitespace-nowrap">HealthSphere</span>
       </motion.h1>
       <motion.p
         className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 font-normal"

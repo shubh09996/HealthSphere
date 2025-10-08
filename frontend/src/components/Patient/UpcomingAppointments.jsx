@@ -3,10 +3,10 @@ import { User, Calendar } from 'lucide-react';
 
 const UpcomingAppointments = () => {
     return (
-        <div className="bg-card p-6 rounded-xl border border-border shadow-sm">
+        <div className="bg-card p-4 sm:p-6 rounded-xl border border-border shadow-sm">
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-foreground">Upcoming Appointments</h2>
-                <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors text-sm flex items-center gap-2">
+                <h2 className="text-lg sm:text-xl font-bold text-foreground">Upcoming Appointments</h2>
+                <button className="bg-blue-500 text-white font-bold py-1 px-2 sm:py-1.5 sm:px-3 rounded-lg hover:bg-blue-600 transition-colors text-sm flex items-center gap-2">
                     <Calendar size={16} /> Book New
                 </button>
             </div>
@@ -20,7 +20,7 @@ const UpcomingAppointments = () => {
                                 <User className="text-blue-600 dark:text-blue-400" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-foreground">Dr. Anjali Sharma</h4>
+                                <h4 className="font-bold text-base sm:text-lg text-foreground">Dr. Anjali Sharma</h4>
                                 <p className="text-sm text-muted-foreground">Cardiology • City Hospital</p>
                                 <p className="text-sm text-muted-foreground mt-1">Oct 7, 2025  •  10:30 AM</p>
                             </div>

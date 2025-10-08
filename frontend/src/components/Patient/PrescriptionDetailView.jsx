@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Share2, ShoppingCart, User, Stethoscope, Calendar } from 'lucide-react';
+import { Download, Share2, ShoppingCart, User, Stethoscope, Calendar, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const PrescriptionDetailView = ({ prescription }) => {
@@ -21,12 +21,12 @@ const PrescriptionDetailView = ({ prescription }) => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-card p-6 rounded-xl border border-border h-full flex flex-col"
+            className="bg-card p-4 sm:p-6 rounded-xl border border-border flex flex-col"
         >
             {/* Header */}
             <div className="flex justify-between items-start pb-4 border-b border-border">
                 <div>
-                    <h2 className="text-2xl font-bold text-foreground">Prescription Details</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-foreground">Prescription Details</h2>
                     <p className="text-sm text-muted-foreground">ID: {prescription.id}</p>
                 </div>
                  {!isExpired ? (
