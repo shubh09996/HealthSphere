@@ -14,9 +14,9 @@ const OnlineMedicineCard = ({ result }) => {
                 <h3 className="font-bold text-lg text-foreground">{result.brandName} <span className="text-sm font-normal text-muted-foreground">{result.strength}</span></h3>
                 <p className="text-xs text-muted-foreground">{result.genericName}</p>
                  <div className="flex items-center gap-2 mt-2 justify-center sm:justify-start">
-                    <img src={result.platformLogo} alt={result.platform} className="h-4"/>
-                    {result.discount && <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-800">{result.discount} OFF</span>}
-                </div>
+                     <img src={result.platformLogo} alt={result.platform} className="h-4"/>
+                     {result.discount && <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-100 text-green-800">{result.discount} OFF</span>}
+                 </div>
             </div>
              <div className="flex sm:flex-col items-center justify-between sm:justify-center w-full sm:w-auto mt-4 sm:mt-0">
                 <p className="text-xl font-bold text-primary">₹{result.price.toFixed(2)}</p>
@@ -24,7 +24,8 @@ const OnlineMedicineCard = ({ result }) => {
                     href={result.buyNowUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="font-bold py-2 px-6 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+                    // === IS BUTTON MEIN GRADIENT LAGAYA HAI ===
+                    className="font-bold py-2 px-6 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90 transition-opacity"
                 >
                     Buy Now
                 </a>

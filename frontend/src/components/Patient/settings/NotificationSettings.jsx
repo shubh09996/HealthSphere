@@ -5,7 +5,7 @@ import ProfileSettings from './ProfileSettings';
 
 const { default: SettingsCard } = { default: ({ title, description, children, footer }) => (
     <div className="bg-card border border-border rounded-xl">
-        <div className="p-6 border-b border-border"><h3 className="text-lg font-bold">{title}</h3><p className="text-sm text-muted-foreground mt-1">{description}</p></div>
+        <div className="p-6 border-b border-border"><h3 className="text-lg font-bold text-foreground">{title}</h3><p className="text-sm text-muted-foreground mt-1">{description}</p></div>
         <div className="p-6 space-y-4">{children}</div>
         <div className="p-4 bg-muted/50 rounded-b-xl text-right">{footer}</div>
     </div>
@@ -14,7 +14,15 @@ const { default: SettingsCard } = { default: ({ title, description, children, fo
 
 const SwitchToggle = ({ enabled, setEnabled }) => {
     return (
-        <div onClick={() => setEnabled(!enabled)} className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors ${enabled ? 'bg-primary justify-end' : 'bg-muted justify-start'}`}>
+        // === SWITCH PAR GRADIENT LAGAYA HAI ===
+        <div 
+            onClick={() => setEnabled(!enabled)} 
+            className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors ${
+                enabled 
+                ? 'bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end justify-end' 
+                : 'bg-muted justify-start'
+            }`}
+        >
             <motion.div layout className="w-4 h-4 bg-white rounded-full shadow-md" />
         </div>
     );
@@ -29,7 +37,12 @@ const NotificationSettings = () => {
         <SettingsCard
             title="Notification Preferences"
             description="Choose how you want to be notified."
-            footer={<button className="font-bold py-2 px-5 rounded-lg bg-primary text-primary-foreground">Save Preferences</button>}
+            // === SAVE PREFERENCES BUTTON PAR GRADIENT LAGAYA HAI ===
+            footer={
+                <button className="font-bold py-2 px-5 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90 transition-opacity">
+                    Save Preferences
+                </button>
+            }
         >
             <div className="flex justify-between items-center p-2 rounded-md hover:bg-muted">
                 <div>

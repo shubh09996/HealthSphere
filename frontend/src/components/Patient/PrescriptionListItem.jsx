@@ -19,9 +19,12 @@ const PrescriptionListItem = ({ prescription, onSelect, isActive }) => {
         >
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4 overflow-hidden">
-                    <div className={`p-3 rounded-full flex-shrink-0 ${isActive ? 'bg-primary/20' : 'bg-muted'}`}>
-                        <FileText size={20} className={isActive ? 'text-primary' : 'text-foreground'}/>
+                    
+                    {/* === IS ICON MEIN GRADIENT LAGAYA HAI === */}
+                    <div className="p-3 rounded-full flex-shrink-0 bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white">
+                        <FileText size={20} />
                     </div>
+                    
                     <div className="truncate">
                         <p className="font-bold text-foreground truncate">{prescription.doctor.name}</p>
                         <p className="text-sm text-muted-foreground truncate">

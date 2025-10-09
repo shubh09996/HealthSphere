@@ -9,7 +9,7 @@ export const offlineShopsData = [
         timings: 'Open 24 Hours',
         inventory: ['med-001', 'med-002'], // Medicine IDs they stock
         // NEW: Image added for the shop
-        image: 'https://images.unsplash.com/photo-1576683567339-3395d8ab2b88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+        image: 'https://www.cityairnews.com/uploads/images/image-750x-2022-09-19-05:59:27pm-632860a7c7706.jpg',
     },
     {
         id: 'shop-02',
@@ -20,7 +20,7 @@ export const offlineShopsData = [
         timings: '8:00 AM - 11:00 PM',
         inventory: ['med-003', 'med-001'],
         // NEW: Image added for the shop
-        image: 'https://images.unsplash.com/photo-1621593358986-a703c4f21802?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi1Wcxa8Br3rf_yE0II0l3HiO-eY4OKzHc3w&s',
     },
     {
         id: 'shop-03',
@@ -31,6 +31,6 @@ export const offlineShopsData = [
         timings: '9:00 AM - 10:00 PM',
         inventory: ['med-002'],
         // NEW: Image added for the shop
-        image: 'https://images.unsplash.com/photo-1555994222-ac2938a2e128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+        image: 'https://content.jdmagicbox.com/v2/comp/delhi/u9/011pxx11.xx11.220322123211.s4u9/catalogue/-045oaaj168.jpg',
     },
 ];

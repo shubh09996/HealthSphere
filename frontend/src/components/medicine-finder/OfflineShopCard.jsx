@@ -36,9 +36,10 @@ const OfflineShopCard = ({ result }) => {
                 </div>
 
                 <div className="mt-auto pt-6 flex gap-3">
-                     <a href={`tel:${result.phone}`} className="flex-1 flex items-center justify-center gap-2 font-bold py-2 px-4 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
-                        <Phone size={16}/> Call Now
-                    </a>
+                     {/* === IS BUTTON MEIN GRADIENT LAGAYA HAI === */}
+                      <a href={`tel:${result.phone}`} className="flex-1 flex items-center justify-center gap-2 font-bold py-2 px-4 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90 transition-opacity">
+                          <Phone size={16}/> Call Now
+                      </a>
                     <button className="flex-1 font-semibold py-2 px-4 rounded-lg border border-border text-foreground hover:bg-muted">
                         Reserve
                     </button>

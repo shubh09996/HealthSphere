@@ -25,7 +25,12 @@ const ProfileSettings = () => {
             <SettingsCard
                 title="Personal Information"
                 description="Update your personal details here."
-                footer={<button className="font-bold py-2 px-5 rounded-lg bg-primary text-primary-foreground">Save Changes</button>}
+                // === IS BUTTON PAR GRADIENT LAGAYA HAI ===
+                footer={
+                    <button className="font-bold py-2 px-5 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90 transition-opacity">
+                        Save Changes
+                    </button>
+                }
             >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
