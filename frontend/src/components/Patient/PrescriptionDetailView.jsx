@@ -29,7 +29,7 @@ const PrescriptionDetailView = ({ prescription }) => {
                     <h2 className="text-xl sm:text-2xl font-bold text-foreground">Prescription Details</h2>
                     <p className="text-sm text-muted-foreground">ID: {prescription.id}</p>
                 </div>
-                 {!isExpired ? (
+                {!isExpired ? (
                     <span className="text-sm font-bold px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
                 ) : (
                     <span className="text-sm font-bold px-3 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">Expired</span>
@@ -76,11 +76,11 @@ const PrescriptionDetailView = ({ prescription }) => {
                     <tbody>
                         {prescription.medicines.map((med, index) => (
                              <tr key={index} className="border-b border-border">
-                                <td className="p-3 font-semibold text-foreground">{med.name}</td>
-                                <td className="p-3 text-muted-foreground">{med.dosage}</td>
-                                <td className="p-3 text-muted-foreground">{med.frequency}</td>
-                                <td className="p-3 text-muted-foreground">{med.duration}</td>
-                            </tr>
+                                 <td className="p-3 font-semibold text-foreground">{med.name}</td>
+                                 <td className="p-3 text-muted-foreground">{med.dosage}</td>
+                                 <td className="p-3 text-muted-foreground">{med.frequency}</td>
+                                 <td className="p-3 text-muted-foreground">{med.duration}</td>
+                             </tr>
                         ))}
                     </tbody>
                 </table>
@@ -94,7 +94,8 @@ const PrescriptionDetailView = ({ prescription }) => {
 
             {/* Action Buttons */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                 <button className="flex-1 flex items-center justify-center gap-2 font-bold py-2 px-4 rounded-lg bg-primary text-primary-foreground hover:opacity-90">
+                 {/* === IS BUTTON MEIN GRADIENT LAGAYA HAI === */}
+                 <button className="flex-1 flex items-center justify-center gap-2 font-bold py-2 px-4 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90">
                     <ShoppingCart size={18}/> Order Medicines
                 </button>
                 <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 font-semibold py-2 px-4 rounded-lg border border-border text-foreground hover:bg-muted">

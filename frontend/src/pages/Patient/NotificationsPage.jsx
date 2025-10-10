@@ -4,7 +4,7 @@ import { notificationsData as initialNotifications } from '../../data/notificati
 import { Link, useNavigate } from 'react-router-dom';
 import * as LucideIcons from 'lucide-react';
 
-// Helper function to format time (No changes here)
+// Helper function to format time
 const timeAgo = (date) => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
     let interval = seconds / 31536000;
@@ -40,17 +40,20 @@ const NotificationItem = ({ notification, onMarkRead }) => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ type: 'spring' }}
             onClick={handleClick}
-            // RESPONSIVE: Adjusted padding and gap for mobile
-            className={`flex items-start gap-3 sm:gap-4 p-3 sm:p-4 border-b border-border cursor-pointer transition-colors ${notification.isRead ? 'hover:bg-muted' : 'bg-primary/5 hover:bg-primary/10'}`}
+            className={`flex items-start gap-3 sm:gap-4 p-3 sm:p-4 border-b border-border cursor-pointer transition-colors ${notification.isRead ? 'hover:bg-muted' : 'bg-cyan-400/5 hover:bg-cyan-400/10'}`}
         >
-            {!notification.isRead && <div className="mt-1 w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0" />}
-            <div className={`mt-1 text-primary flex-shrink-0 ${notification.isRead && 'ml-[14px]'}`}>
-                <Icon size={20} />
+            {!notification.isRead && <div className="mt-1 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex-shrink-0" />}
+            
+            <div className={`mt-1 flex-shrink-0 ${notification.isRead && 'ml-[14px]'}`}>
+                <div className="p-1.5 rounded-lg bg-gradient-to-r from-cyan-400 via-teal-500 to-purple-500">
+                    <Icon size={18} className="text-white" />
+                </div>
             </div>
+
             <div className="flex-1">
                 <p className="font-bold text-foreground">{notification.title}</p>
                 <p className="text-sm text-muted-foreground mt-1">{notification.message}</p>
-                <p className="text-xs text-primary font-semibold mt-2">{timeAgo(notification.timestamp)}</p>
+                <p className="text-xs font-semibold mt-2 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">{timeAgo(notification.timestamp)}</p>
             </div>
         </motion.div>
     );
@@ -64,7 +67,7 @@ const NotificationsPage = () => {
 
     const filteredNotifications = useMemo(() => {
         if (activeTab === 'All') return notifications;
-        const category = activeTab.slice(0, -1); // 'Appointments' -> 'Appointment'
+        const category = activeTab.slice(0, -1);
         return notifications.filter(n => n.category === category);
     }, [activeTab, notifications]);
 
@@ -81,16 +84,14 @@ const NotificationsPage = () => {
     };
 
     return (
-        // REMOVED: max-w-4xl mx-auto to allow layout to control width
         <div>
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
                 <div>
-                    {/* RESPONSIVE: Adjusted font size */}
-                    <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Notifications</h1>
+                    <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">Notifications</h1>
                     <p className="text-muted-foreground mt-1">Your recent alerts and updates.</p>
                 </div>
                 <div className="flex gap-2 self-start sm:self-center">
-                    <button onClick={handleMarkAllRead} className="text-sm font-semibold text-muted-foreground hover:text-primary">Mark all as read</button>
+                    <button onClick={handleMarkAllRead} className="text-sm font-semibold text-muted-foreground hover:bg-gradient-to-r hover:from-cyan-400 hover:to-purple-500 hover:text-transparent hover:bg-clip-text">Mark all as read</button>
                     <button onClick={handleClearAll} className="text-sm font-semibold text-red-500 hover:text-red-700">Clear all</button>
                 </div>
             </div>
@@ -99,10 +100,10 @@ const NotificationsPage = () => {
             <div className="flex border-b border-border mb-4 overflow-x-auto">
                 {tabs.map(tab => (
                     <button key={tab} onClick={() => setActiveTab(tab)}
-                        className={`relative px-3 sm:px-4 py-2 text-sm font-semibold flex-shrink-0 ${activeTab === tab ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                        className={`relative px-3 sm:px-4 py-2 text-sm font-semibold flex-shrink-0 ${activeTab === tab ? 'bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text' : 'text-muted-foreground hover:text-foreground'}`}
                     >
                         {tab}
-                        {activeTab === tab && <motion.div layoutId="notif-tab-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
+                        {activeTab === tab && <motion.div layoutId="notif-tab-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500" />}
                     </button>
                 ))}
             </div>

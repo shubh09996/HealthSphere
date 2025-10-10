@@ -16,16 +16,25 @@ const TimelineItem = ({ record, isLast, onViewDetails }) => {
     return (
         <div className="flex gap-4">
             <div className="flex flex-col items-center">
-                <div className="bg-primary/20 text-primary p-2 rounded-full z-10">{icons[record.type] || <Stethoscope />}</div>
+                {/* === ICON PAR GRADIENT LAGAYA HAI === */}
+                <div className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white p-2 rounded-full z-10">
+                    {icons[record.type] || <Stethoscope />}
+                </div>
                 {!isLast && <div className="w-px flex-1 bg-border -mt-1"></div>}
             </div>
             <motion.div className="flex-1 pb-8 md:w-11/12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <div className="p-4 bg-card border border-border rounded-xl">
                     <p className="text-xs text-muted-foreground">{new Date(record.date).toDateString()}</p>
                     <h3 className="font-bold text-foreground mt-1">{record.title}</h3>
-                    {record.type === 'Consultation' && <p className="text-sm text-muted-foreground mt-2 truncate md:block hidden">{record.details.summary}</p>}
+                    {record.type === 'Consultation' && <p className="text-sm text-muted-foreground mt-2 truncate">{record.details.summary}</p>}
                     <div className="mt-4">
-                        <button onClick={() => onViewDetails(record)} className="text-sm font-semibold text-primary">View Details →</button>
+                        {/* === VIEW DETAILS PAR GRADIENT LAGAYA HAI === */}
+                        <button 
+                            onClick={() => onViewDetails(record)} 
+                            className="text-sm font-semibold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text"
+                        >
+                            View Details →
+                        </button>
                     </div>
                 </div>
             </motion.div>
@@ -45,14 +54,12 @@ const HealthRecordsPage = () => {
     }, [filter]);
 
     return (
-        // === SIRF IS LINE SE PADDING (p-4 sm:p-6 lg:p-8) HATAI HAI ===
         <div className="space-y-8 overflow-x-hidden">
             <div>
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">My Health Records</h1>
                 <p className="text-muted-foreground mt-1">A chronological timeline of your health journey.</p>
             </div>
 
-            {/* === BLOOD PRESSURE CARD WALA SECTION HATA DIYA HAI === */}
             <div>
                 <div className="flex flex-wrap gap-2 mb-6 justify-center sm:justify-start">
                     {filters.map(f => (

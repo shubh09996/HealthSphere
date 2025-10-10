@@ -53,11 +53,9 @@ const AppointmentsPage = () => {
             {/* Page Header */}
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                 <div>
-                    {/* === SIRF IS LINE ME CHANGE KIYA HAI === */}
                     <h1 className="text-2xl sm:text-3xl md:text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">My Appointments</h1>
                     <p className="text-muted-foreground mt-1">View and manage your appointments.</p>
                 </div>
-                {/* Button ko Link se replace kiya gaya */}
                 <Link 
                     to="/patient/book-appointment"
                     className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white font-bold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
@@ -70,15 +68,25 @@ const AppointmentsPage = () => {
             {/* Tabs */}
             <div className="border-b border-border">
                 <nav className="-mb-px flex space-x-3 sm:space-x-6">
+                    {/* === UPCOMING TAB PAR GRADIENT LAGAYA HAI === */}
                     <button 
                         onClick={() => setActiveTab('upcoming')}
-                        className={`py-3 px-1 border-b-2 font-semibold text-sm transition-colors ${activeTab === 'upcoming' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'}`}
+                        className={`py-3 px-1 border-b-2 font-semibold text-sm transition-colors ${
+                            activeTab === 'upcoming' 
+                            ? 'border-primary bg-gradient-to-r from-hs-gradient-start to-hs-gradient-end text-transparent bg-clip-text' 
+                            : 'border-transparent text-muted-foreground hover:text-foreground'
+                        }`}
                     >
                         Upcoming
                     </button>
+                    {/* === PREVIOUS TAB PAR GRADIENT LAGAYA HAI === */}
                     <button 
                         onClick={() => setActiveTab('previous')}
-                        className={`py-3 px-1 border-b-2 font-semibold text-sm transition-colors ${activeTab === 'previous' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'}`}
+                        className={`py-3 px-1 border-b-2 font-semibold text-sm transition-colors ${
+                            activeTab === 'previous' 
+                            ? 'border-primary bg-gradient-to-r from-hs-gradient-start to-hs-gradient-end text-transparent bg-clip-text' 
+                            : 'border-transparent text-muted-foreground hover:text-foreground'
+                        }`}
                     >
                         Previous
                     </button>

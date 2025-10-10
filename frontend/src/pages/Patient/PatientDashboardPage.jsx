@@ -11,9 +11,13 @@ const PatientDashboardPage = () => {
             <PremiumBanner />
 
             <div>
-                {/* === CHANGE IS HERE === */}
-                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">
-                    Welcome back, Ravi! 👋
+                {/* === EMOJI KO GRADIENT SE ALAG KIYA HAI === */}
+                <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2">
+                    <span className="bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text">
+                        Welcome back, Ravi!
+                    </span>
+                    {/* Yeh span emoji ko original color mein rakhega */}
+                    <span>👋</span>
                 </h1>
                 <p className="text-sm sm:text-base text-muted-foreground mt-1">Here's your health overview for today</p>
             </div>

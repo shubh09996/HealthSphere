@@ -26,7 +26,8 @@ const MedicineFinderPage = () => {
                         placeholder="Search for any medicine..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-card border-2 border-border rounded-full pl-12 pr-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        // === IS LINE MEIN FOCUS KA COLOR CHANGE KIYA HAI ===
+                        className="w-full bg-card border-2 border-border rounded-full pl-12 pr-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-hs-gradient-middle focus:border-transparent transition-all"
                     />
                 </div>
             </div>

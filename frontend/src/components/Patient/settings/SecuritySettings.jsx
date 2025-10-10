@@ -4,7 +4,7 @@ import ProfileSettings from './ProfileSettings'; // Dummy import to get Settings
 
 const { default: SettingsCard } = { default: ({ title, description, children, footer }) => (
     <div className="bg-card border border-border rounded-xl">
-        <div className="p-6 border-b border-border"><h3 className="text-lg font-bold">{title}</h3><p className="text-sm text-muted-foreground mt-1">{description}</p></div>
+        <div className="p-6 border-b border-border"><h3 className="text-lg font-bold text-foreground">{title}</h3><p className="text-sm text-muted-foreground mt-1">{description}</p></div>
         <div className="p-6 space-y-4">{children}</div>
         <div className="p-4 bg-muted/50 rounded-b-xl text-right">{footer}</div>
     </div>
@@ -13,10 +13,15 @@ const { default: SettingsCard } = { default: ({ title, description, children, fo
 
 const SecuritySettings = () => {
     return (
-         <SettingsCard
+       <SettingsCard
             title="Change Password"
             description="For your security, we recommend choosing a strong password that you don't use elsewhere."
-            footer={<button className="font-bold py-2 px-5 rounded-lg bg-primary text-primary-foreground">Update Password</button>}
+            // === IS BUTTON PAR GRADIENT LAGAYA HAI ===
+            footer={
+                <button className="font-bold py-2 px-5 rounded-lg bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-white hover:opacity-90 transition-opacity">
+                    Update Password
+                </button>
+            }
         >
             <div>
                 <label className="text-sm font-medium">Current Password</label>
