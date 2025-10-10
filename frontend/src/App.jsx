@@ -7,6 +7,9 @@ import PatientDashboardLayout from './components/patient/PatientDashboardLayout.
 import DoctorDashboardLayout from './components/doctor/DoctorDashboardLayout.jsx';
 
 // Public Pages
+import FeaturesPage from './pages/FeaturesPage.jsx';
+import RolesPage from './pages/RolesPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
@@ -53,6 +56,9 @@ function App() {
         {/* --- PUBLIC ROUTES --- */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/roles" element={<RolesPage />} />
+          <Route path="/about" element={<AboutPage />} /> 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
         </Route>
