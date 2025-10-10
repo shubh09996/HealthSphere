@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Stethoscope, Pill, Bot, User, Briefcase, Heart, Shield, Eye, EyeOff, Mail, Lock, Ambulance, Building, CheckCircle, Hospital, Syringe, ClipboardList 
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Data for dynamic content based on selected role
 const roleData = {
@@ -63,6 +63,7 @@ const LoginPage = () => {
     const [role, setRole] = useState('patient');
     const [showPassword, setShowPassword] = useState(false);
     const selectedRoleData = roleData[role];
+    const navigate = useNavigate();
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -204,6 +205,26 @@ const LoginPage = () => {
                         Sign In
                     </motion.button>
 
+                    {/* Dummy Login Buttons for Patient and Doctor */}
+                    <div className="flex flex-col space-y-3">
+                        <motion.button
+                            className="w-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-primary-foreground py-3 rounded-md font-semibold hover:opacity-90 transition-opacity"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => navigate('/patient/dashboard')}
+                        >
+                            Patient Login
+                        </motion.button>
+                        <motion.button
+                            className="w-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-primary-foreground py-3 rounded-md font-semibold hover:opacity-90 transition-opacity"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => navigate('/doctor/dashboard')}
+                        >
+                            Doctor Login
+                        </motion.button>
+                    </div>
+                    
                     <p className="text-center text-muted-foreground text-xs sm:text-sm">
                         Don't have an account? 
                         <Link to="/signup" className="font-medium bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end text-transparent bg-clip-text hover:underline ml-1">

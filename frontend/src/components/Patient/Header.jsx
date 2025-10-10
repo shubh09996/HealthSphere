@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, Bell, Menu, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext.jsx';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const { theme, toggleTheme } = useTheme();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropdownRef]);
+
     return (
         <header className="flex items-center justify-between p-4 bg-card border-b border-border sticky top-0 z-40">
             <div className="flex items-center space-x-4">
@@ -62,11 +79,42 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 </Link>
 
                 {/* Profile Icon */}
-                <Link to="/patient/profile" className="group">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end flex items-center justify-center text-white font-bold cursor-pointer ring-2 ring-offset-2 ring-offset-card ring-transparent group-hover:ring-primary transition-all">
+                <div className="relative" ref={dropdownRef}>
+                    <button 
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className="w-9 h-9 rounded-full bg-gradient-to-r from-hs-gradient-start via-hs-gradient-middle to-hs-gradient-end flex items-center justify-center text-white font-bold cursor-pointer ring-2 ring-offset-2 ring-offset-card ring-transparent hover:ring-primary transition-all"
+                    >
                         R
-                    </div>
-                </Link>
+                    </button>
+                    
+                    {isDropdownOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute right-0 mt-2 w-48 bg-card rounded-md shadow-lg py-1 z-50 border border-border"
+                        >
+                            <Link 
+                                to="/patient/profile" 
+                                className="block px-4 py-2 text-sm text-foreground hover:bg-muted"
+                                onClick={() => setIsDropdownOpen(false)}
+                            >
+                                View Profile
+                            </Link>
+                            <button 
+                                onClick={() => { 
+                                    // Implement logout logic here
+                                    navigate('/login'); // Redirect to login page after logout
+                                    setIsDropdownOpen(false);
+                                }}
+                                className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted"
+                            >
+                                Logout
+                            </button>
+                        </motion.div>
+                    )}
+                </div>
             </div>
         </header>
     );
