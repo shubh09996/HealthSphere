@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
-import PublicLayout from './components/patient/PublicLayout.jsx';
+import PublicLayout from './components/Patient/PublicLayout.jsx';
 import PatientDashboardLayout from './components/patient/PatientDashboardLayout.jsx';
 import DoctorDashboardLayout from './components/doctor/DoctorDashboardLayout.jsx';
 
